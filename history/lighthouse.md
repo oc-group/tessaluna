@@ -11,6 +11,12 @@ tower with green bands, 31 metres tall.
 
 ![The lighthouse](../assets/lighthouse.png)
 
+## The keeper
+
+For two centuries a keeper lived in the cottage at the foot of the tower and wrote down every
+night in [[lighthouse-log|the log]]. Today the light is automatic and the cottage is a small
+museum: see [[keeper's cottage]].
+
 ## The light
 
 | Feature | Value |
