@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.png binary
+*.odt binary
+*.ods binary
+*.odp binary
+documents/lantern-night-flyer.htm -text

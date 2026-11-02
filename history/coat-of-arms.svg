@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" width="120" height="140" role="img" aria-label="Coat of arms of Tessaluna">
+  <title>Coat of arms of Tessaluna</title>
+  <path d="M10 10 H110 V70 C110 110, 60 130, 60 130 C60 130, 10 110, 10 70 Z"
+        fill="#1d5b79" stroke="#0e3346" stroke-width="3"/>
+  <path d="M48 30 C 78 34, 88 72, 70 104 C 80 74, 70 44, 48 30 Z" fill="#f4ecd8"/>
+  <circle cx="44" cy="62" r="7" fill="#e8b04a"/>
+</svg>

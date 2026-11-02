@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="gitwiki-presentation" content="16:9">
+<title>Welcome to Tessaluna</title>
+<style>
+  :root { --sea: #1d5b79; --sand: #f4ecd8; --light: #e8b04a; --ink: #1f2933; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #111; font-family: sans-serif; }
+  .deck { position: relative; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; inset: 0; margin: auto;
+    width: min(100vw, 177.78vh); height: min(56.25vw, 100vh);
+    background: var(--sand); color: var(--ink);
+    padding: 5% 7%; display: none; flex-direction: column; justify-content: center;
+    font-size: min(2.6vw, 4.6vh);
+  }
+  .slide.active { display: flex; }
+  .slide h1 { color: var(--sea); font-size: 2.4em; margin: 0 0 .3em; }
+  .slide h2 { color: var(--sea); font-size: 1.6em; margin: 0 0 .5em; }
+  .slide.cover { background: var(--sea); color: var(--sand); text-align: center; }
+  .slide.cover h1 { color: var(--light); }
+  .slide img { max-height: 45%; align-self: center; }
+  .columns { display: flex; gap: 2em; }
+  .columns > div { flex: 1; }
+  .notes { display: none; }
+  .bar {
+    position: fixed; bottom: 0; left: 0; right: 0; text-align: center;
+    color: #ccc; font-size: 14px; padding: 6px;
+  }
+  .bar button { background: #333; color: #eee; border: 0; padding: 4px 12px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide cover">
+    <h1>Welcome to Tessaluna</h1>
+    <p>An island in six slides</p>
+    <aside class="notes">Greet the group and point out the map on the wall.</aside>
+  </section>
+
+  <section class="slide">
+    <h2>Where it is</h2>
+    <img src="../assets/map.svg" alt="Map of Tessaluna">
+    <p>In the middle of the Vessaro Sea, an hour and a half by ferry from Vessara Coast.</p>
+    <aside class="notes">Show the crescent shape: Long Point to the north, Short Point to the south.</aside>
+  </section>
+
+  <section class="slide">
+    <h2>Two regions</h2>
+    <div class="columns">
+      <div><h3>North</h3><ul><li>Mount Lantern, 712 m</li><li>Highfold</li><li>North Harbour</li></ul></div>
+      <div><h3>South</h3><ul><li>Old Town</li><li>South Harbour</li><li>Eastern Salt Pans</li></ul></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The lighthouse</h2>
+    <img src="../assets/lighthouse.png" alt="The lighthouse">
+    <p>Lit in 212 after the Landing: two flashes every ten seconds.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Lantern Night</h2>
+    <p>On the longest night of the year every door has a lantern. At midnight the lighthouse goes
+    dark for one minute.</p>
+    <aside class="notes">Mention that visitors are welcome in the procession, and that the soup is free.</aside>
+  </section>
+
+  <section class="slide">
+    <h2>Getting here</h2>
+    <p>The <em>Vessaro Star</em> and the <em>Little Gull</em> sail to South Harbour.</p>
+    <p>Timetables on the <a href="../transport/ferries.md">Ferries</a> page.</p>
+  </section>
+
+</div>
+<div class="bar">
+  <button type="button" id="prev">&larr;</button>
+  <span id="counter"></span>
+  <button type="button" id="next">&rarr;</button>
+</div>
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('section.slide'));
+  var current = 0;
+  function show(n) {
+    current = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === current); });
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+    history.replaceState(null, '', '#slide-' + (current + 1));
+  }
+  function fromHash() {
+    var m = /^#slide-(\d+)$/.exec(location.hash);
+    return m ? parseInt(m[1], 10) - 1 : 0;
+  }
+  document.getElementById('prev').addEventListener('click', function () { show(current - 1); });
+  document.getElementById('next').addEventListener('click', function () { show(current + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(current - 1); }
+  });
+  window.addEventListener('hashchange', function () { show(fromHash()); });
+  show(fromHash());
+})();
+</script>
+</body>
+</html>
